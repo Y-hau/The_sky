@@ -1,0 +1,21 @@
+spring:
+  mvc:
+    static-path-pattern: /static/**
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+###################  beetl配置  ###################
+beetl:
+  templatesPath: templates
+  delimiter-statement-start: \@   #开始结束标签(yaml不允许@开头)
+  delimiter-statement-end: null
+  resource-tagroot: common/tags   #自定义标签文件Root目录和后缀
+  resource-tagsuffix: tag
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:com/yhau/dao/mapper/*.xml
+  type-aliases-package: com.yhau.model
