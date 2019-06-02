@@ -6,16 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sky_wenda" />
+        <module name="wenda_sky" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="sky_wenda" target="1.8" />
+      <module name="wenda_sky" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="sky_wenda" options="-parameters" />
+      <module name="wenda_sky" options="-parameters" />
     </option>
   </component>
 </project>

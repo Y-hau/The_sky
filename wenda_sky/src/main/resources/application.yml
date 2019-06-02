@@ -1,11 +1,3 @@
-spring:
-  mvc:
-    static-path-pattern: /static/**
-
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
-    username: root
-    password: root
 
 ###################  beetl配置  ###################
 beetl:
@@ -15,6 +7,18 @@ beetl:
   resource-tagroot: common/tags   #自定义标签文件Root目录和后缀
   resource-tagsuffix: tag
 
+###################  spring配置  ###################
+spring:
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+###################  mybatis配置  ###################
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath*:com/yhau/dao/mapper/*.xml

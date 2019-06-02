@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/The_sky.iml" filepath="$PROJECT_DIR$/.idea/The_sky.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sky_wenda/sky_wenda.iml" filepath="$PROJECT_DIR$/sky_wenda/sky_wenda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenda_sky/wenda_sky.iml" filepath="$PROJECT_DIR$/wenda_sky/wenda_sky.iml" />
     </modules>
   </component>
 </project>
