@@ -23,6 +23,6 @@ public interface LoginTicketDao {
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where user_id=#{userId}"})
     LoginTicket selectbyUserId(int userId);
 
-    @Update({"update ", TABLE_NAME, " set status=#{status} where ticket=#{ticket}"})
+    @Update({"update ", TABLE_NAME, " set status=#{status},expired=#{expired} where ticket=#{ticket}"})
     void updateLoginTicket(LoginTicket loginTicket);
 }

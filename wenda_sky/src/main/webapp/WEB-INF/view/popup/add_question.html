@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提问</title>
+    <link rel="stylesheet" type="text/css"	href="../static/styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css"	href="../static/styles/iconfont.css">
+    <link rel="stylesheet" type="text/css"	href="../static/styles/style.css">
+    <style>
+        .container-fluid{background: #fff;height: 358px;}
+        .container-fluid input{margin-bottom: 0px;display: inline-block}
+        .container-fluid .control-label{width: 100px;text-align: right;    display: inline-block; margin-left: -85px;}
+        .container-fluid .form-group{    padding-bottom: 0px;margin-bottom:20px;text-align: center;position: relative;}
+        .container-fluid .buttonbox{text-align: center}
+        .container-fluid  .spanyz{    color: #e03131;right: 50px;position: absolute;}
+        .container-fluid .form-horizontal {margin-top: 66px;}
+    </style>
+</head>
+<body>
+<form class="form-horizontal">
+    <div class="container-fluid" >
+
+            <div class="form-group" style="margin-top: 75px;">
+                <input type="text" class="form-control" id="title" name="title" placeholder="写下你的问题" style="height:22px;min-height:auto;">
+                <span class="spanyz" id="id3"></span>
+            </div>
+            <div class="form-group">
+                <label for="content" class="col-sm-2 control-label">问题说明（可选）：</label>
+                <textarea class="form-control" id="content" name="content" placeholder="问题背景、条件等详细信息" style="font-style:italic;width:98%;"></textarea>
+                <span class="spanyz" id="id1"></span>
+            </div>
+    </div>
+    <div class="control-group issureBox">
+        <button type="button" id="close" onclick="close()">取消</button>
+        <button type="button" id="affirm" onclick="addQuestion()">确定</button>
+    </div>
+    </form>
+    <script src="../static/scripts/main/jquery.min.js"></script>
+    <script src="../static/scripts/main/bootstrap.js"></script>
+    <script src="../static/scripts/main/layer.js"></script>
+    <script src="../static/scripts/main/ajax-object.js"></script>
+    <script type="application/javascript">
+        function addQuestion() {
+            var ajax = new $ax("/question/add", function (data) {
+                if(data.code === 999){
+                    var str = parent.parent.window.encodeURIComponent(window.document.location.pathname);
+                    parent.window.location.href = '/reglogin?next=' + parent.parent.window.encodeURIComponent(window.document.location.pathname);
+                }else{
+                    layer.msg("修改成功!", {
+                        icon: 1,
+                        time: 3000,
+                        end:function(){
+                            parent.window.location.href = '/';
+                        }
+                    });
+                }
+            }, function (data) {
+                var str = eval("(" + data.responseText + ")");
+                layer.msg("修改失败!" + str.message + "!", {
+                    icon: 2,
+                    time: 3000
+                });
+            });
+            ajax.set("title");
+            ajax.set("content");
+            ajax.start();
+        };
+        function  close() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+    </script>
+</body>
+</html>
+

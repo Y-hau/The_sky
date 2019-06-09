@@ -1,10 +1,9 @@
-package com.yhau.util;
+package com.yhau.core.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
-import java.util.Map;
 
 /**
  * Created by nowcoder on 2016/7/3.

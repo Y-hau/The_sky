@@ -21,6 +21,7 @@ public class LoginRequredIntercept implements HandlerInterceptor {
         if (hostHandler.getUser() == null){
             response.sendRedirect("/reglogin?next="+request.getRequestURI());
         }
+
         return true;
     }
 

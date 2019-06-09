@@ -73,8 +73,8 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
-                if (StringUtils.isBlank(next) && next .equals("")){
-                    return "redirect:/"+next;
+                if (!StringUtils.isBlank(next) && !next .equals("")){
+                    return "redirect:"+next;
                 }
                 return "redirect:/";
             }else{
@@ -92,4 +92,5 @@ public class LoginController {
         model.addAttribute("next", next);
         return "/login.html";
     }
+
 }
