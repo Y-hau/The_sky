@@ -20,11 +20,6 @@ public class QuestionController {
     private HostHandler hostHandler;
 
     @RequestMapping(value = "/question_add")
-    public String addQue(){
-        return "/popup/addQue.html";
-    }
-
-    @RequestMapping(value = "/addQue")
     public String add_Que(){
         return "/popup/add_question.html";
     }
