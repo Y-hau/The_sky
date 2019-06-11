@@ -1,28 +1,25 @@
 package com.yhau.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yhau.config.web.HostHandler;
 import com.yhau.core.util.ResponseUtil;
-import com.yhau.service.QuestionService;
+import com.yhau.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 
 @Controller
-public class QuestionController {
-    @Resource
-    private QuestionService questionService;
+public class MessageController {
 
-    @RequestMapping(value = "/question/add")
-    @ResponseBody
-    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content){
+    @Autowired
+    private MessageService messageService;
+
+    @RequestMapping(value = "/msg/addMessage", method = {RequestMethod.POST})
+    public String addMessage(@RequestParam("toName") String toName, @RequestParam("content") String content){
         JSONObject jsonObject = new JSONObject();
         try{
-            ResponseUtil responseUtil = questionService.addQuestion(title, content);
+            ResponseUtil responseUtil = messageService.addMessage(toName, content);
             return jsonObject.toJSONString(responseUtil);
         }catch (Exception e){
             return jsonObject.toJSONString(ResponseUtil.fail("添加问题失败"));
