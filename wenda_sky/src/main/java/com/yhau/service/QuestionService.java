@@ -5,6 +5,7 @@ import com.yhau.core.util.ResponseUtil;
 import com.yhau.dao.QuestionDao;
 import com.yhau.model.Question;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,22 +20,29 @@ public class QuestionService {
     @Resource
     HostHandler hostHandler;
 
+    @Resource
+    SensitiveService sensitiveService;
+
     public List<Question> getLatestQuestions(int userId, int offset, int limit) {
         return questionDao.selectLatestQuestions(userId, offset, limit);
     }
 
-    public ResponseUtil addQuestion(String title, String content){
+    public Question selectById(int qid) {
+        return questionDao.selectById(qid);
+    }
 
-        if (hostHandler.getUser() !=null) {
+    public ResponseUtil addQuestion(String title, String content) {
+
+        if (hostHandler.getUser() != null) {
             Question question = new Question();
-            question.setTitle(title);
+            question.setTitle(sensitiveService.filter(HtmlUtils.htmlEscape(title)));
             question.setCommentCount(0);
-            question.setContent(content);
+            question.setContent(sensitiveService.filter(HtmlUtils.htmlEscape(content)));
             question.setCreatedDate(new Date());
             question.setUserId(hostHandler.getUser().getId());
             questionDao.addQuestion(question);
             return ResponseUtil.ok();
-        }else{
+        } else {
             return ResponseUtil.ok(999);
         }
     }
