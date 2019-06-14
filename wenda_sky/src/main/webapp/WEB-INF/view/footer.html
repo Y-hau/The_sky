@@ -1,4 +1,7 @@
 <script type="text/javascript" src="../static/scripts/main/jquery.js"></script>
+<!--<script type="text/javascript" src="../static/scripts/main/jquery.min.js"></script>-->
+<script type="text/javascript" src="../static/scripts/main/jquery.rotate.min.js"></script>
+<script type="text/javascript" src="../static/scripts/main/layer.js"></script>
 <script type="text/javascript" src="../static/scripts/dist/jquery.caret.js"></script>
 <script type="text/javascript" src="../static/scripts/dist/jquery.atwho.js"></script>
 <script type="text/javascript" src="../static/scripts/main/base/base.js"></script>
@@ -7,6 +10,20 @@
 <script type="text/javascript" src="../static/scripts/main/component/component.js"></script>
 <script type="text/javascript" src="../static/scripts/main/component/popup.js"></script>
 <script type="text/javascript" src="../static/scripts/main/component/popupAdd.js"></script>
-<script type="text/javascript" src="../static/scripts/main/component/popupMsg.js"></script>
+<!--<script type="text/javascript" src="../static/scripts/main/component/popupMsg.js"></script>-->
 <script type="text/javascript" src="../static/scripts/main/site/home.js"></script>
+
+<script type="text/javascript">
+    $("#zh-top-nav-count-wrap").on("click", function () {
+        layer.open({
+            type: 2,
+            shade: 0.8,
+            title: '提问',
+            skin: 'layui-layer-lan',
+            area: ['600px', '400px'],
+            content: '/message_add'
+        });
+        // window.location.href = '/question_add';
+    });
+</script>
 </body></html>

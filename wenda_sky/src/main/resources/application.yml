@@ -23,7 +23,7 @@ mybatis:
   mapper-locations: classpath*:com/yhau/dao/mapper/*.xml
   type-aliases-package: com.yhau.model
 
-  ###################  log配置  ###################
-  logging:
-    level:
-      com.yhau.dao: DEBUG
+####################  log配置  ######################
+logging:
+  level:
+    com.yhau.dao: DEBUG

@@ -10,6 +10,8 @@ import com.yhau.model.ViewObject;
 import com.yhau.service.CommentService;
 import com.yhau.service.QuestionService;
 import com.yhau.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ import java.util.List;
 
 @Controller
 public class QuestionController {
+    private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
+
     @Resource
     private QuestionService questionService;
 
@@ -45,6 +49,7 @@ public class QuestionController {
             ResponseUtil responseUtil = questionService.addQuestion(title, content);
             return jsonObject.toJSONString(responseUtil);
         } catch (Exception e) {
+            logger.error("添加问题失败", e);
             return jsonObject.toJSONString(ResponseUtil.fail("添加问题失败"));
         }
     }

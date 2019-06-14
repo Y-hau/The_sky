@@ -3,6 +3,8 @@ package com.yhau.dao;
 import com.yhau.model.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserDao {
     String TABLE_NAME = " user ";
@@ -24,4 +26,7 @@ public interface UserDao {
 
     @Delete({"delete from ", TABLE_NAME, " where id=#{id}"})
     void deleteById(int id);
+
+    @Select({"select name from ", TABLE_NAME})
+    List<User> selectUserNameList();
 }
