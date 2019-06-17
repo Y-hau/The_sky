@@ -94,7 +94,7 @@ public class UserService {
         return userDao.selectById(id);
     }
 
-    public List<User> getUserNameList() {
+    public List<String> getUserNameList() {
         return userDao.selectUserNameList();
     }
 

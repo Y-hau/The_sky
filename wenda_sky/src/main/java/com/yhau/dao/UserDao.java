@@ -28,5 +28,5 @@ public interface UserDao {
     void deleteById(int id);
 
     @Select({"select name from ", TABLE_NAME})
-    List<User> selectUserNameList();
+    List<String> selectUserNameList();
 }

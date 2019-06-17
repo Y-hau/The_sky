@@ -6,32 +6,53 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>提问</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles/bootstrap.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="../static/styles/bootstrap.min.css">-->
     <link rel="stylesheet" href="../static/styles/index.css">
+    <link rel="stylesheet" href="../static/styles/jquery.atwho.css">
+    <style>
+        .inputor:focus {
+            border: 1px solid rgb(6, 150, 247);
+        }
+
+        .inputor span {
+            color: #3366FF;
+        }
+    </style>
 </head>
 <body>
 <form class="form-horizontal">
-    <div class="zh-add-question-form" style="margin:0;">
-        <div class="zg-section-big clearfix">
-            <div class="add-question-section-title">发给：</div>
-            <div class="zg-form-text-input add-question-title-form" style="position: relative;" id="editable"
-                 contenteditable="true">
-                <input type="text" class="js-name zg-editor-input zu-seamless-input-origin-element" placeholder="姓名"
-                       style="height:22px;min-height:auto;"></textarea>
-            </div>
-        </div>
-        <div class="zg-section-big">
-            <div class="add-question-section-title">内容：</div>
-            <div id="zh-question-suggest-detail-container" class="zm-editable-status-editing">
-                <div class="zm-editable-editor-wrap no-toolbar">
-                    <div class="zm-editable-editor-outer">
-                        <div class="zm-editable-editor-field-wrap">
-                            <textarea class="js-content zm-editable-editor-field-element editable" placeholder="私信内容"
-                                      style="font-style:italic;width:98%;"></textarea>
+    <div class="modal-dialog-content">
+        <div class="zh-add-question-form">
+            <div class="js-content">
+                <div id="jsCpn1" class=" zh-add-question-form">
+                    <div class="zg-section-big clearfix" style="position: relative;">
+                        <div class="add-question-section-title">发给：</div>
+                        <div id="inputor" class="zg-form-text-input add-question-title-form inputor"
+                             contenteditable="true">
+                            <!--<input id="inputor"-->
+                            <!--type="text" class="js-title zg-editor-input zu-seamless-input-origin-element"-->
+                            <!--placeholder="@姓名" style="height:22px;min-height:auto;">-->
+                        </div>
+                    </div>
+                    <div class="zg-section-big">
+                        <div class="add-question-section-title">内容：</div>
+                        <div id="zh-question-suggest-detail-container" class="zm-editable-status-editing">
+                            <div class="zm-editable-editor-wrap no-toolbar">
+                                <div class="zm-editable-editor-outer">
+                                    <div class="zm-editable-editor-field-wrap"><textarea
+                                            class="js-content zm-editable-editor-field-element editable"
+                                            placeholder="私信内容"
+                                            style="font-style:italic;width:98%;"></textarea></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="zm-command js-footer"><span
+                    style="display:none;margin-left:10px;line-height:30px;float:left;color:#c33;"
+                    class="js-error"></span><a href="javascript:void(0);" class="zm-command-cancel js-cancel">取消</a><a
+                    href="javascript:void(0);" class="zg-r5px zu-question-form-add zg-btn-blue js-ok">发送</a></div>
         </div>
     </div>
 </form>
@@ -42,55 +63,58 @@
 <script type="text/javascript" src="../static/scripts/dist/jquery.caret.js"></script>
 <script type="text/javascript" src="../static/scripts/dist/jquery.atwho.js"></script>
 <script type="application/javascript">
-    var da;
-    new $ax("/user/search", function (data) {
-        da = data;
-    }).start();
-    $('#editable').atwho({
-        at: "@",
-        data: da,
-        displayTpl: "<li><span class='fa fa-user-md'></span> ${name}</li>",
-    });
-    $('[contenteditable]').each(function () {
-        // 干掉IE http之类地址自动加链接
-        try {
-            document.execCommand("AutoUrlDetect", false, false);
-        } catch (e) {
-        }
-
-        $(this).on('paste', function (e) {
-            e.preventDefault();
-            var text = null;
-
-            if (window.clipboardData && clipboardData.setData) {
-                // IE
-                text = window.clipboardData.getData('text');
-            } else {
-                text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('在这里输入文本');
-            }
-            if (document.body.createTextRange) {
-                if (document.selection) {
-                    textRange = document.selection.createRange();
-                } else if (window.getSelection) {
-                    sel = window.getSelection();
-                    var range = sel.getRangeAt(0);
-
-                    // 创建临时元素，使得TextRange可以移动到正确的位置
-                    var tempEl = document.createElement("span");
-                    tempEl.innerHTML = "&#FEFF;";
-                    range.deleteContents();
-                    range.insertNode(tempEl);
-                    textRange = document.body.createTextRange();
-                    textRange.moveToElementText(tempEl);
-                    tempEl.parentNode.removeChild(tempEl);
+    $(function () {
+        $('#inputor').atwho({
+            at: "@",
+            callbacks: {
+                remoteFilter: function (query, callback) {
+                    $.getJSON("/user/search", {q: query}, function (data) {
+                        callback(data)
+                    });
                 }
-                textRange.text = text;
-                textRange.collapse(false);
-                textRange.select();
-            } else {
-                // Chrome之类浏览器
-                document.execCommand("insertText", false, text);
             }
+        });
+        $('[contenteditable]').each(function () {
+            // 干掉IE http之类地址自动加链接
+            try {
+                document.execCommand("AutoUrlDetect", false, false);
+            } catch (e) {
+            }
+
+            $(this).on('paste', function (e) {
+                e.preventDefault();
+                var text = null;
+
+                if (window.clipboardData && clipboardData.setData) {
+                    // IE
+                    text = window.clipboardData.getData('text');
+                } else {
+                    text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('在这里输入文本');
+                }
+                if (document.body.createTextRange) {
+                    if (document.selection) {
+                        textRange = document.selection.createRange();
+                    } else if (window.getSelection) {
+                        sel = window.getSelection();
+                        var range = sel.getRangeAt(0);
+
+                        // 创建临时元素，使得TextRange可以移动到正确的位置
+                        var tempEl = document.createElement("span");
+                        tempEl.innerHTML = "&#FEFF;";
+                        range.deleteContents();
+                        range.insertNode(tempEl);
+                        textRange = document.body.createTextRange();
+                        textRange.moveToElementText(tempEl);
+                        tempEl.parentNode.removeChild(tempEl);
+                    }
+                    textRange.text = text;
+                    textRange.collapse(false);
+                    textRange.select();
+                } else {
+                    // Chrome之类浏览器
+                    document.execCommand("insertText", false, text);
+                }
+            });
         });
     });
 

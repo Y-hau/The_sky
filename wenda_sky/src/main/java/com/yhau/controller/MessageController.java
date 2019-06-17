@@ -2,7 +2,6 @@ package com.yhau.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yhau.core.util.ResponseUtil;
-import com.yhau.model.User;
 import com.yhau.service.MessageService;
 import com.yhau.service.UserService;
 import org.slf4j.Logger;
@@ -57,8 +56,8 @@ public class MessageController {
     @RequestMapping(value = "/user/search")
     @ResponseBody
     public String usersjson() {
-        List<User> userNameList = userService.getUserNameList();
+        List<String> userNameList = userService.getUserNameList();
         JSONObject jsonObject = new JSONObject();
-        return jsonObject.toJSONString();
+        return jsonObject.toJSONString(userNameList);
     }
 }
