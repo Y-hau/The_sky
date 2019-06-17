@@ -39,10 +39,12 @@
                         <div id="zh-question-suggest-detail-container" class="zm-editable-status-editing">
                             <div class="zm-editable-editor-wrap no-toolbar">
                                 <div class="zm-editable-editor-outer">
-                                    <div class="zm-editable-editor-field-wrap"><textarea
-                                            class="js-content zm-editable-editor-field-element editable"
-                                            placeholder="私信内容"
-                                            style="font-style:italic;width:98%;"></textarea></div>
+                                    <div class="zm-editable-editor-field-wrap">
+                                        <textarea id="content"
+                                                  class="js-content zm-editable-editor-field-element editable"
+                                                  placeholder="私信内容"
+                                                  style="font-style:italic;width:98%;"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +53,10 @@
             </div>
             <div class="zm-command js-footer"><span
                     style="display:none;margin-left:10px;line-height:30px;float:left;color:#c33;"
-                    class="js-error"></span><a href="javascript:void(0);" class="zm-command-cancel js-cancel">取消</a><a
-                    href="javascript:void(0);" class="zg-r5px zu-question-form-add zg-btn-blue js-ok">发送</a></div>
+                    class="js-error"></span><a href="javascript:close();" class="zm-command-cancel js-cancel">取消</a>
+                <button type="button" onclick="addMessage()" class="zg-r5px zu-question-form-add zg-btn-blue js-ok">发送
+                </button>
+            </div>
         </div>
     </div>
 </form>
@@ -118,28 +122,22 @@
         });
     });
 
-    function addQuestion() {
-        var ajax = new $ax("/question/add", function (data) {
-            if (data.code === 999) {
-                var str = parent.parent.window.encodeURIComponent(window.document.location.pathname);
-                parent.window.location.href = '/reglogin?next=' + parent.parent.window.encodeURIComponent(window.document.location.pathname);
-            } else {
-                layer.msg("修改成功!", {
-                    icon: 1,
-                    time: 3000,
-                    end: function () {
-                        parent.window.location.href = '/';
-                    }
-                });
-            }
+    function addMessage() {
+        var ajax = new $ax("/message/add", function (data) {
+            layer.msg("添加成功!", {
+                icon: 1,
+                time: 500,
+                end: function () {
+                    parent.window.location.href = '/';
+                }
+            });
         }, function (data) {
-            var str = eval("(" + data.responseText + ")");
-            layer.msg("修改失败!" + str.message + "!", {
+            layer.msg(data.message + "!", {
                 icon: 2,
-                time: 3000
+                time: 500
             });
         });
-        ajax.set("title");
+        ajax.set("name");
         ajax.set("content");
         ajax.start();
     };

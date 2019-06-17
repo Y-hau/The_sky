@@ -1215,7 +1215,7 @@
         alias: void 0,
         data: null,
         displayTpl: "<li>${name}</li>",
-        insertTpl: "<span>${atwho-at}${name}</span>",
+        insertTpl: "<span name='name'>${name}</span>",
         headerTpl: null,
         callbacks: DEFAULT_CALLBACKS,
         functionOverrides: {},
