@@ -1,12 +1,12 @@
 .atwho-view {
     position: absolute;
-    /*display: none !important;*/
-    top: 55.5px !important;
-    left: 28px !important;
+    display: none;
+    top: 59px !important;
+    left: 19px !important;
     margin-top: 18px;
     background: white;
     color: black;
-    /*border: 1px solid #DDD;*/
+    border: 1px solid #DDD;
     border-radius: 3px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     min-width: 120px;

@@ -2,6 +2,7 @@ package com.yhau.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yhau.core.util.ResponseUtil;
+import com.yhau.model.ViewObject;
 import com.yhau.service.MessageService;
 import com.yhau.service.UserService;
 import org.slf4j.Logger;
@@ -44,7 +45,13 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/msg/list", method = RequestMethod.GET)
-    public String getConversationList() {
+    public String getConversationList(Model model) {
+        try {
+            List<ViewObject> conversations = messageService.getConversationList();
+            model.addAttribute("conversations", conversations);
+        } catch (Exception e) {
+            logger.error("获取站内信列表失败" + e.getMessage());
+        }
         return "/letter.html";
     }
 

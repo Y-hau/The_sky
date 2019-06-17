@@ -1215,7 +1215,7 @@
         alias: void 0,
         data: null,
         displayTpl: "<li>${name}</li>",
-        insertTpl: "<span name='name'>${name}</span>",
+        insertTpl: "${name}",
         headerTpl: null,
         callbacks: DEFAULT_CALLBACKS,
         functionOverrides: {},
