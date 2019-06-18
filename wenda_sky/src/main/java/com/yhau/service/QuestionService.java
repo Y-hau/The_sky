@@ -31,7 +31,7 @@ public class QuestionService {
         return questionDao.selectById(qid);
     }
 
-    public ResponseUtil addQuestion(String title, String content) {
+    public String addQuestion(String title, String content) {
 
         if (hostHandler.getUser() != null) {
             Question question = new Question();
@@ -41,9 +41,9 @@ public class QuestionService {
             question.setCreatedDate(new Date());
             question.setUserId(hostHandler.getUser().getId());
             questionDao.addQuestion(question);
-            return ResponseUtil.ok();
+            return ResponseUtil.getJSONString(0);
         } else {
-            return ResponseUtil.ok(999);
+            return ResponseUtil.getJSONString(999);
         }
     }
 }

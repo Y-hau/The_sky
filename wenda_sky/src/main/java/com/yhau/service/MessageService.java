@@ -28,7 +28,7 @@ public class MessageService {
     @Resource
     private SensitiveService sensitiveService;
 
-    public ResponseUtil addMessage(String toName, String content) {
+    public String addMessage(String toName, String content) {
         User user = userDao.selectByName(toName);
         if (user == null) {
             throw new SkyException(ExceptionEnum.NO_THIS_USER);
@@ -41,9 +41,9 @@ public class MessageService {
             message.setCreatedDate(new Date());
             messageDao.addMessage(message);
         } else {
-            return ResponseUtil.ok(999);
+            return ResponseUtil.getJSONString(999);
         }
-        return ResponseUtil.ok();
+        return ResponseUtil.getJSONString(0);
     }
 
     public List<ViewObject> getConversationList() {
@@ -60,5 +60,22 @@ public class MessageService {
             conversations.add(vo);
         }
         return conversations;
+    }
+
+    public List<ViewObject> getConversationDetail(String conversationId) {
+        List<Message> conversationList = messageDao.getConversationDetail(conversationId, 0, 10);
+        List<ViewObject> messages = new ArrayList<>();
+        for (Message msg : conversationList) {
+            ViewObject vo = new ViewObject();
+            vo.set("message", msg);
+            User user = userDao.selectById(msg.getFromId());
+            if (user == null) {
+                continue;
+            }
+            vo.set("headUrl", user.getHeadUrl());
+            vo.set("userId", user.getId());
+            messages.add(vo);
+        }
+        return messages;
     }
 }

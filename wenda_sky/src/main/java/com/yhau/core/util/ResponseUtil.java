@@ -1,61 +1,29 @@
 package com.yhau.core.util;
 
-import java.io.Serializable;
+import com.alibaba.fastjson.JSONObject;
 
-public class ResponseUtil implements Serializable {
+import java.util.Map;
 
-	private static final long serialVersionUID = 6099134931358707391L;
-	
-	private boolean success = true;
-	private String msg  = "";
-	private Integer code;
-	
-	private ResponseUtil() {
+public class ResponseUtil {
+    public static String getJSONString(int code) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        return json.toJSONString();
+    }
 
-	}
-	
-	private ResponseUtil(Integer code) {
-		this.code = code;
-	}
-	
-	/**
-	 * 返回成功响应
-	 */
-	public static ResponseUtil ok() {
-		return new ResponseUtil();
-	}
-	
-	/**
-	 * 返回成功响应,携带数据
-	 */
-	public static ResponseUtil ok(Integer code) {
-		return new ResponseUtil(code);
-	}
-	
-	public static ResponseUtil fail(String msg) {
-		ResponseUtil response = new ResponseUtil();
-		response.success = false;
-		response.msg = msg;
-		return response;
-	}
-	
-	public static ResponseUtil fail(String msg, Integer code) {
-		ResponseUtil response = new ResponseUtil(code);
-		response.success = false;
-		response.msg = msg;
-		return response;
-	}
-	
-	public Integer getCode() {
-		return code;
-	}
-	
-	public String getMsg() {
-		return msg;
-	}
-	
-	public boolean isSuccess() {
-		return  success;
-	}
+    public static String getJSONString(int code, String msg) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        json.put("msg", msg);
+        return json.toJSONString();
+    }
 
+    public static String getJSONString(int code, Map<String, Object> map) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            json.put(entry.getKey(), entry.getValue());
+        }
+        return json.toJSONString();
+    }
 }

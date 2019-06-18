@@ -25,8 +25,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SkyException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ResponseUtil notFount(SkyException e) {
-        return ResponseUtil.fail(e.getMessage(), e.getCode());
+    public String notFount(SkyException e) {
+        return ResponseUtil.getJSONString(e.getCode(), e.getMessage());
     }
 
 }

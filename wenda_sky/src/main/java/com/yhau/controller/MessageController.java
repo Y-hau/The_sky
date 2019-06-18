@@ -36,11 +36,10 @@ public class MessageController {
     public String addMessage(@RequestParam("toName") String toName, @RequestParam("content") String content) {
         JSONObject jsonObject = new JSONObject();
         try {
-            ResponseUtil responseUtil = messageService.addMessage(toName, content);
-            return jsonObject.toJSONString(responseUtil);
+            return messageService.addMessage(toName, content);
         } catch (Exception e) {
             logger.error("发送信息失败");
-            return jsonObject.toJSONString(ResponseUtil.fail("添加问题失败"));
+            return ResponseUtil.getJSONString(1, "添加问题失败");
         }
     }
 
@@ -56,7 +55,13 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/msg/detail", method = RequestMethod.GET)
-    public String getConversationDetail(Model model, @RequestParam("conversationId") int conversationId) {
+    public String getConversationDetail(Model model, @RequestParam("conversationId") String conversationId) {
+        try {
+            List<ViewObject> messages = messageService.getConversationDetail(conversationId);
+            model.addAttribute("messages", messages);
+        } catch (Exception e) {
+            logger.error("获取详情消息失败" + e.getMessage());
+        }
         return "/letterDetail.html";
     }
 

@@ -1,6 +1,5 @@
 package com.yhau.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yhau.config.web.HostHandler;
 import com.yhau.core.util.EntityType;
 import com.yhau.core.util.ResponseUtil;
@@ -44,13 +43,11 @@ public class QuestionController {
     @RequestMapping(value = "/question/add")
     @ResponseBody
     public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content) {
-        JSONObject jsonObject = new JSONObject();
         try {
-            ResponseUtil responseUtil = questionService.addQuestion(title, content);
-            return jsonObject.toJSONString(responseUtil);
+            return questionService.addQuestion(title, content);
         } catch (Exception e) {
             logger.error("添加问题失败", e);
-            return jsonObject.toJSONString(ResponseUtil.fail("添加问题失败"));
+            return ResponseUtil.getJSONString(1, "添加问题失败");
         }
     }
 
