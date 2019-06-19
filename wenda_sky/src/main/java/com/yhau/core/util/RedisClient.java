@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisSentinelPool;
+import redis.clients.jedis.JedisPool;
 
 @Component
 public class RedisClient {
@@ -14,7 +14,7 @@ public class RedisClient {
     private static final Logger logger = LoggerFactory.getLogger(RedisClient.class);
 
     @Autowired
-    private JedisSentinelPool jedisPool;
+    private JedisPool jedisPool;
 
     public Jedis getJedis() {
         return jedisPool.getResource();
@@ -32,6 +32,7 @@ public class RedisClient {
             jedis = getJedis();
             return jedis.sadd(key, value);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("发生异常" + e.getMessage());
         } finally {
             close(jedis);

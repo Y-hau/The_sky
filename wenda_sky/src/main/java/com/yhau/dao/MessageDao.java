@@ -1,10 +1,7 @@
 package com.yhau.dao;
 
 import com.yhau.model.Message;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -29,4 +26,7 @@ public interface MessageDao {
             TABLE_NAME, " where from_id=#{userId} or to_id=#{userId} order by id desc) tt group by conversation_id  order by created_date desc limit #{offset}, #{limit}"})
     List<Message> getConversationList(@Param("userId") int userId,
                                       @Param("offset") int offset, @Param("limit") int limit);
+
+    @Update({"update ", INSERT_FIELDS, " set has_read=1 where conversation_id=#{conversationId}"})
+    void updateHasRead(String conversationId);
 }

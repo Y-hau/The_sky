@@ -7,6 +7,7 @@ import com.yhau.model.Comment;
 import com.yhau.model.Question;
 import com.yhau.model.ViewObject;
 import com.yhau.service.CommentService;
+import com.yhau.service.LikeService;
 import com.yhau.service.QuestionService;
 import com.yhau.service.UserService;
 import org.slf4j.Logger;
@@ -40,6 +41,9 @@ public class QuestionController {
     @Autowired
     private HostHandler hosthandler;
 
+    @Autowired
+    private LikeService likeService;
+
     @RequestMapping(value = "/question/add")
     @ResponseBody
     public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content) {
@@ -60,6 +64,12 @@ public class QuestionController {
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
             vo.set("comment", comment);
+            if (hosthandler.getUser() == null) {
+                vo.set("liked", 0);
+            } else {
+                vo.set("liked", likeService.getLikeStatus(hosthandler.getUser().getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+            }
+            vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
             vo.set("user", userService.getUser(comment.getUserId()));
             vos.add(vo);
         }

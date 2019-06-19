@@ -1,26 +1,19 @@
 package com.yhau.config.redis;
 
-import com.google.common.collect.Sets;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.Assert;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.JedisSentinelPool;
-import redis.clients.jedis.Protocol;
-
-import java.util.Set;
 
 @Configuration
 public class RedisConfig {
     private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
-    @Bean(name = "jedis.pool")
+    /*@Bean(name = "jedis.pool")
     @Autowired
     public JedisSentinelPool jedisPool(@Qualifier("jedis.pool.config") JedisPoolConfig config,
                                        @Value("${spring.redis.sentinel.master}") String clusterName,
@@ -36,6 +29,17 @@ public class RedisConfig {
         JedisSentinelPool sentinelJedisPool = new JedisSentinelPool(clusterName, sentinels, config, Protocol.DEFAULT_TIMEOUT, password);
 
         return sentinelJedisPool;
+    }*/
+
+    @Bean
+    public JedisPool jedisPool(@Qualifier("jedis.pool.config") JedisPoolConfig config,
+                               @Value("${spring.redis.host}") String host,
+                               @Value("${spring.redis.port}") Integer port,
+                               @Value("${spring.redis.timeout}") int timeout,
+                               @Value("${spring.redis.password}") String password,
+                               @Value("${spring.redis.database}") Integer database) {
+        JedisPool jedisPool = new JedisPool(config, host, port, timeout, password, database);
+        return jedisPool;
     }
 
     @Bean(name = "jedis.pool.config")

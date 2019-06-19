@@ -52,7 +52,7 @@ public class MessageService {
         List<Message> conversationList = messageDao.getConversationList(localUserId, 0, 10);
         for (Message msg : conversationList) {
             ViewObject vo = new ViewObject();
-            vo.set("conversation", msg);
+            vo.set("message", msg);
             int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
             User user = userDao.selectById(targetId);
             vo.set("user", user);
@@ -63,6 +63,7 @@ public class MessageService {
     }
 
     public List<ViewObject> getConversationDetail(String conversationId) {
+        messageDao.updateHasRead(conversationId);
         List<Message> conversationList = messageDao.getConversationDetail(conversationId, 0, 10);
         List<ViewObject> messages = new ArrayList<>();
         for (Message msg : conversationList) {

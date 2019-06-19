@@ -33,7 +33,7 @@ public class MessageController {
 
     @RequestMapping(value = "/msg/addMessage", method = {RequestMethod.POST})
     @ResponseBody
-    public String addMessage(@RequestParam("toName") String toName, @RequestParam("content") String content) {
+    public String addMessage(@RequestParam("name") String toName, @RequestParam("content") String content) {
         JSONObject jsonObject = new JSONObject();
         try {
             return messageService.addMessage(toName, content);

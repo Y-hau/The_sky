@@ -26,12 +26,15 @@ mybatis:
 ###################  redis配置  ###################
 ---
 spring.redis:
-  #  sentinel:
-  #    #与redis环境配置的保持一致
-  #    master: mymaster
-  #    #节点集合以，隔开
-  #    nodes: localhost:26388,localhost:26380,localhost:26381
-  password:
+  #    sentinel:
+  #      #与redis环境配置的保持一致
+  #      master: mymaster
+  #      #节点集合以，隔开
+  #      nodes: localhost:26388,localhost:26380,localhost:26381
+  host: localhost
+  port: 6379
+  database: 0
+  password: P@ssw0rd
   timeout: 1000
   jedis.pool:
     #jedis最大分配对象
