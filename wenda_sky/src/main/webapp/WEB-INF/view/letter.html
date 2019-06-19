@@ -21,11 +21,11 @@
                     </div>
                 </div>
                 <div class="chat-headbox">
-                <span class="msg-num">
-                ^if(conversation.unread > 0){
+                    ^if(conversation.unread > 0){
+                    <span class="msg-num">
                     ${conversation.unread}
-                }
                 </span>
+                    ^}
                     <a class="list-head">
                         <img alt="头像" src="${conversation.user.headUrl}">
                     </a>

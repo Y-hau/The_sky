@@ -20,7 +20,7 @@ public class CommentController {
                              @RequestParam("content") String content,
                              @RequestParam(value = "next", required = false) String next) {
         try {
-            if (next != null) {
+            if (next != null && !next.equals("")) {
                 return "redirect:/reglogin?next=" + next;
             }
             commentService.addComment(questionId, content);

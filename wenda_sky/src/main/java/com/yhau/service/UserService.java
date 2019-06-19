@@ -71,21 +71,18 @@ public class UserService {
 
     public String addLoginTicket(int userId) {
         LoginTicket loginTicket = loginTicketDao.selectbyUserId(userId);
+        Date now = new Date();
+        now.setTime(3600 * 24 * 100 + now.getTime());
         if (loginTicket != null) {
-            if (loginTicket.getExpired().after(new Date()) || loginTicket.getStatus() == 0) {
-                Date now = new Date();
-                now.setTime(3600 * 24 * 100 + now.getTime());
+            if (!loginTicket.getExpired().after(new Date()) || loginTicket.getStatus() != 0) {
                 loginTicket.setExpired(now);
                 loginTicket.setStatus(0);
                 loginTicketDao.updateLoginTicket(loginTicket);
             }
         } else {
-
             loginTicket = new LoginTicket();
             loginTicket.setUserId(userId);
             loginTicket.setTicket(UUID.randomUUID().toString().replaceAll("-", ""));
-            Date now = new Date();
-            now.setTime(3600 * 24 * 100 + now.getTime());
             loginTicket.setExpired(now);
             loginTicketDao.addTicket(loginTicket);
         }
