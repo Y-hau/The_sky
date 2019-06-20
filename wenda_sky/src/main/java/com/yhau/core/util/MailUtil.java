@@ -10,6 +10,11 @@ import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 
 /*https://www.jianshu.com/p/16cfcfbedecc*/
+
+/**
+ * https://blog.csdn.net/qiushi_1990/article/details/81477107
+ * pringBoot配置文件敏感信息加密，springboot配置文件数据库密码加密jasypt
+ */
 @Component
 public class MailUtil {
     private static final Logger logger = LoggerFactory.getLogger(MailUtil.class);
