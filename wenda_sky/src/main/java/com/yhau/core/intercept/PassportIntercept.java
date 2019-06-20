@@ -43,11 +43,7 @@ public class PassportIntercept implements HandlerInterceptor {
                 return true;
             }
             User user = userDao.selectById(loginTicket.getUserId());
-            if (hostHandler.getUser().getId() != user.getId()) {
-                response.sendRedirect("/reglogin?next=" + request.getRequestURI());
-            } else {
-                hostHandler.setUser(user);
-            }
+            hostHandler.setUser(user);
         }
         return true;
     }

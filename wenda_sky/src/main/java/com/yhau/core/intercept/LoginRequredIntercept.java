@@ -4,7 +4,6 @@ import com.yhau.config.web.HostHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +17,9 @@ public class LoginRequredIntercept implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (hostHandler.getUser() == null){
-            response.sendRedirect("/reglogin?next="+request.getRequestURI());
+        if (hostHandler.getUser() == null) {
+            response.sendRedirect("/reglogin?next=" + request.getRequestURI());
         }
-
         return true;
     }
 

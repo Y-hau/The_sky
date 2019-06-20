@@ -1,8 +1,8 @@
 package com.yhau.controller;
 
 import com.yhau.config.web.HostHandler;
-import com.yhau.core.util.EntityType;
 import com.yhau.core.util.ResponseUtil;
+import com.yhau.core.util.StaticUtil;
 import com.yhau.model.Comment;
 import com.yhau.model.Question;
 import com.yhau.model.ViewObject;
@@ -59,7 +59,7 @@ public class QuestionController {
     public String questionDetail(HttpServletRequest request, Model model, @PathVariable("qid") int qid) {
         Question question = questionService.selectById(qid);
         model.addAttribute("question", question);
-        List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
+        List<Comment> commentList = commentService.getCommentsByEntity(qid, StaticUtil.ENTITY_QUESTION);
         List<ViewObject> vos = new ArrayList<>();
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
@@ -67,9 +67,9 @@ public class QuestionController {
             if (hosthandler.getUser() == null) {
                 vo.set("liked", 0);
             } else {
-                vo.set("liked", likeService.getLikeStatus(hosthandler.getUser().getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+                vo.set("liked", likeService.getLikeStatus(hosthandler.getUser().getId(), StaticUtil.ENTITY_COMMENT, comment.getId()));
             }
-            vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
+            vo.set("likeCount", likeService.getLikeCount(StaticUtil.ENTITY_COMMENT, comment.getId()));
             vo.set("user", userService.getUser(comment.getUserId()));
             vos.add(vo);
         }

@@ -1,7 +1,7 @@
 package com.yhau.service;
 
 import com.yhau.config.web.HostHandler;
-import com.yhau.core.util.EntityType;
+import com.yhau.core.util.StaticUtil;
 import com.yhau.dao.CommentDao;
 import com.yhau.dao.QuestionDao;
 import com.yhau.model.Comment;
@@ -30,8 +30,8 @@ public class CommentService {
             comment.setContent(sensitiveService.filter(HtmlUtils.htmlEscape(content)));
             comment.setCreatedDate(new Date());
             comment.setEntityId(questionId);
-            comment.setEntityType(EntityType.ENTITY_QUESTION);
-            comment.setStatus(EntityType.status);
+            comment.setEntityType(StaticUtil.ENTITY_QUESTION);
+            comment.setStatus(StaticUtil.status);
             commentDao.addComment(comment);
             int commentCount = commentDao.getCommentCount(comment.getEntityId(), comment.getEntityType());
             questionDao.updateCommentCount(comment.getEntityId(), commentCount);

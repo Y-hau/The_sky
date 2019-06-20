@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.List;
+
 @Component
 public class RedisClient {
 
@@ -97,6 +99,47 @@ public class RedisClient {
             close(jedis);
         }
         return false;
+    }
+
+    /**
+     * 向list中插入数据  （redis中的list有点类似于队列）
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public long lpush(String key, String value) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.lpush(key, value);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return 0;
+    }
+
+    /**
+     * 移出并获取列表的最后一个元素， 如果列表没有元素会阻塞
+     * 列表直到等待超时或发现可弹出元素为止。
+     *
+     * @param timeout
+     * @param key
+     * @return
+     */
+    public List<String> brpop(int timeout, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.brpop(timeout, key);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return null;
     }
 
     public void close(final Jedis jedis) {

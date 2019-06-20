@@ -27,6 +27,6 @@ public interface MessageDao {
     List<Message> getConversationList(@Param("userId") int userId,
                                       @Param("offset") int offset, @Param("limit") int limit);
 
-    @Update({"update ", INSERT_FIELDS, " set has_read=1 where conversation_id=#{conversationId}"})
+    @Update({"update ", TABLE_NAME, " set has_read=1 where conversation_id=#{conversationId}"})
     void updateHasRead(String conversationId);
 }
