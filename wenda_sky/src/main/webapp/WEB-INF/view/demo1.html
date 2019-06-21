@@ -1,0 +1,93 @@
+<div class="nk-main clearfix">
+    <div class="wrapper">
+        <div class="tabbed">
+            <ul class="clearfix">
+                <li><a href="/login?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960"><span
+                        class="tab-login"></span>登录</a></li>
+                <li class="tab-selected"><a href="javascript:void(0);"><span class="tab-reg"></span>注册</a></li>
+            </ul>
+        </div>
+        <div class="wrapper-content clearfix">
+            <div class="input-section">
+                <form>
+                    <div class="form-group">
+                        <label for="jsEmailIpt" class="control-label">手机号码</label>
+                        <div class="control-group form-phone-fill" id="jsCpn_5_component_0">
+                            <div id="jsCpn_2_component_0" class="btn-group" style="margin-bottom: 0px;">
+                                <button class="btn btn-default dropdown-toggle"><span class="js-txt dropdown-value"
+                                                                                      title="中国+86"
+                                                                                      style="width: 63px;">中国+86</span><span
+                                        class="caret"></span></button>
+                            </div>
+                            <input type="text" id="jsEmailIpt" placeholder="请输入手机号码" autocomplete="new-password"
+                                   name="nowcoder1">
+                            <i class="input-icon fui-cross"></i><i class="input-icon fui-check-inverted"></i><span
+                                class="input-tip"></span></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jsCaptcha" class="control-label">验证码</label>
+                        <div class="btn-group phone-code">
+                            <div class="control-group" id="jsCpn_6_component_1">
+                                <input type="text" id="jsCaptcha" placeholder="请输入验证码">
+                                <i class="input-icon fui-cross"></i><i class="input-icon fui-check-inverted"></i><span
+                                    class="input-tip"></span></div>
+                            <span class="input-group-btn">
+<button class="btn btn-primary" id="jsSendCaptcha" style="padding:0 5px;">获取验证码</button>
+</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jsPasswordIpt" class="control-label">密码</label>
+                        <div class="control-group" id="jsCpn_7_component_2">
+                            <input type="password" id="jsPasswordIpt" placeholder="请输入密码">
+                            <i class="input-icon fui-cross"></i><i class="input-icon fui-check-inverted"></i><span
+                                class="input-tip"></span></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jsPasswordIpt2" class="control-label">重输密码</label>
+                        <div class="control-group" id="jsCpn_8_component_3">
+                            <input type="password" id="jsPasswordIpt2" placeholder="请重复输入密码">
+                            <i class="input-icon fui-cross"></i><i class="input-icon fui-check-inverted"></i><span
+                                class="input-tip"></span></div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div id="jsGtCode" style="float:right;"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-input-login">
+                            <a class="btn btn-primary btn-block" href="javascript:void(0);" id="jsRegisterBtn">立即注册</a>
+                            <input type="submit" class="nk-invisible">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="other-login-way">
+                <span class="separate-line">或</span>
+                <div class="login-way">
+                    <a href="javascript:void(0);"
+                       data-href="https://graph.qq.com/oauth2.0/authorize?client_id=101003590&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/qqconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=web&amp;scope=get_user_info"
+                       class="nc-js-action-oauth login-qq">QQ账号登录</a>
+                    <a href="javascript:void(0);"
+                       data-href="https://api.weibo.com/oauth2/authorize?client_id=3023520088&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/sinaconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=0_51f737e3fd5243e29a9d96192a0b43d8&amp;scope=follow_app_official_microblog"
+                       class="nc-js-action-oauth login-wb">微博账号登录</a>
+                    <a href="javascript:void(0);"
+                       data-href="https://open.weixin.qq.com/connect/qrconnect?appid=wxfee0340998de6ab1&amp;redirect_uri=https%3A%2F%2Fwww.nowcoder.com%2Foauth2%2Flogin%2Fweixin?&amp;response_type=code&amp;scope=snsapi_login&amp;state=11"
+                       class="nc-js-action-oauth login-wx">微信账号登录</a>
+                    <div class="login-fold" id="jsLoginFold">
+                        <a href="javascript:void(0);" class="login-more">更多三方账号</a>
+                        <div class="login-unfold-icons">
+                            <!-- <a href="javascript:void(0);" data-href="https://github.com/login/oauth/authorize?client_id=1c539827b9400016d0c9&response_type=code&redirect_uri=http://www.nowcoder.com/oauth2/gitconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&state=web&scope=user:email" class="nc-js-action-oauth login-git"></a>
+                             -->
+                            <a href="javascript:void(0);"
+                               data-href="https://www.douban.com/service/auth2/auth?client_id=075c6b46242f18c8161541d26c8d4a58&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/dbconfig&amp;state=web"
+                               class="nc-js-action-oauth login-db"></a>
+                            <a href="javascript:void(0);"
+                               data-href="https://graph.renren.com/oauth/authorize?client_id=33356a41ddac4028a9ad64925e68c0e0&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/rrconfig&amp;state=web"
+                               class="nc-js-action-oauth login-rr"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

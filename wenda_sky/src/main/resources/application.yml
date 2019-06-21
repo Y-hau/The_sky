@@ -1,3 +1,8 @@
+################  jasypt加密的密匙  ################
+jasypt:
+  encryptor:
+    password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7
+
 ###################  beetl配置  ###################
 beetl:
   templatesPath: templates
@@ -6,18 +11,19 @@ beetl:
   resource-tagroot: common/tags   #自定义标签文件Root目录和后缀
   resource-tagsuffix: tag
 
-###################  spring配置  ###################
+###################  spring配置  ##################
 spring:
   mvc:
     static-path-pattern: /static/**
     view:
       prefix: /WEB-INF/view
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
-    username: root
-    password: root
+    #    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
+    url: ENC(h1jvkmUSphyFi0VAhr9dfB03y3LlH3LivTpVn5fJwEGApZk8ksjUe73aLKlZpcQj2fJikqjrLkcSqF9WjGk+X5WFoEn/8pM4)
+    username: ENC(fIf3Y83xoGdSI8/evdnKMQ==)
+    password: ENC(HShRtMvSP3UtdzCah5fwOw==)
 
-###################  mybatis配置  ###################
+##################  mybatis配置  ##################
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath*:com/yhau/dao/mapper/*.xml
@@ -34,7 +40,7 @@ spring.redis:
   host: localhost
   port: 6379
   database: 0
-  password: P@ssw0rd
+  password: ENC(sY7xCeYmBcsrl6LOz7/vh/K0cKz1mG+p)
   timeout: 1000
   jedis.pool:
     #jedis最大分配对象
@@ -55,14 +61,15 @@ spring.redis:
     #表示一个对象至少停留在idle状态的最短时间，然后才能被idle object evitor扫描并驱逐；这一项只有在timeBetweenEvictionRunsMillis大于0时才有意义
     minEvictableIdleTimeMillis: 60000
 
-  ###################  email配置  ###################
-  ---
-  spring:
-    mail:
-      username: 528089923@qq.com
-      password: Yh0815..
-      host: smtp.qq.com
-      default-encoding: UTF-8
+###################  email配置  ###################
+---
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: ENC(IoJSsoPZkE9TwU7EzBKXH2I9jecJ94eUDm4joaVdVno=)
+    password: kaovxobzxnzpbggb
+    default-encoding: UTF-8
 
 ####################  log配置  ######################
 logging:
