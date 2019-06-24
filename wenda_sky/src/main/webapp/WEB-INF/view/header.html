@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="mobile-agent" content="format=html5;url=https://nowcoder.com/">
     <meta id="znonce" name="znonce" content="d3edc464cf014708819feffde7ddd01e">
-    <link rel="search" type="application/opensearchdescription+xml" href="https://nowcoder.com/static/search.xml"
-          title="牛客">
+    <!--<link rel="search" type="application/opensearchdescription+xml" href="https://nowcoder.com/static/search.xml"-->
+    <!--title="牛客">-->
     <link rel="stylesheet" type="text/css" href="../static/styles/bootstrap.min.css">
     <style>
         .zm-item-answer-author-info a.collapse {
@@ -30,11 +30,7 @@
            data-za-l="top_navigation_zhihu_logo">牛客</a>
         <div class="top-nav-profile">
             ^if(user == null){
-            <ul class="topnav-noauth clearfix">
-                <li>
-                    <a href="/reglogin">注册/登陆</a>
-                </li>
-            </ul>
+            <a href="/login" class="top-nav-profile-login">登录</a>/<a href="/register" class="top-nav-profile-reg">注册</a>
             ^}else{
             <a href="/user/${user.id!}" class="zu-top-nav-userinfo " id=":0" role="button" aria-haspopup="true"
                aria-activedescendant="">

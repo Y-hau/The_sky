@@ -57,10 +57,10 @@ public class LoginController {
 
     @RequestMapping(value = ("/login"), method = {RequestMethod.POST})
     public String login(Model model,
-                        @RequestParam("username") String username,
-                        @RequestParam("password") String password,
+                        @RequestParam("jsEmailIpt") String username,
+                        @RequestParam("jsPasswordIpt") String password,
                         @RequestParam(value = "next", required = false) String next,
-                        @RequestParam(value = "rememberme", defaultValue = "false") boolean rememberme,
+                        @RequestParam(value = "jsRemLoginChk", defaultValue = "false") boolean rememberme,
                         HttpServletResponse response) {
         try {
             Map<String, String> map = userService.login(username, password);
@@ -91,4 +91,19 @@ public class LoginController {
         return "/login.html";
     }
 
+    @RequestMapping(value = "/login", method = {RequestMethod.GET})
+    public String loin(Model model) {
+        model.addAttribute("isLoginOrRegister", true);
+        model.addAttribute("tabLogin", "tab-selected");
+        model.addAttribute("register", "register");
+        return "/demo.html";
+    }
+
+    @RequestMapping(value = "/register", method = {RequestMethod.GET})
+    public String register(Model model) {
+        model.addAttribute("isLoginOrRegister", false);
+        model.addAttribute("tabReg", "tab-selected");
+        model.addAttribute("login", "login");
+        return "/demo.html";
+    }
 }
