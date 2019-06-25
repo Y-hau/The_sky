@@ -1,5 +1,7 @@
 package com.yhau.controller;
 
+import com.yhau.core.commom.exception.ExceptionEnum;
+import com.yhau.core.util.ResponseUtil;
 import com.yhau.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -7,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -105,5 +104,28 @@ public class LoginController {
         model.addAttribute("tabReg", "tab-selected");
         model.addAttribute("login", "login");
         return "/demo.html";
+    }
+
+    @RequestMapping(value = "/sendCaptcha", method = {RequestMethod.POST})
+    @ResponseBody
+    public String sendCaptcha(@RequestParam("jsEmailIpt") String jsEmailIpt) {
+        try {
+            return userService.sendCaptcha(jsEmailIpt);
+        } catch (Exception e) {
+            logger.error("邮箱验证异常" + e.getMessage());
+            ExceptionEnum serverError = ExceptionEnum.SERVER_ERROR;
+            return ResponseUtil.getJSONString(serverError.getCode(), serverError.getMessage());
+        }
+    }
+
+    @RequestMapping("/vcodeOvertime")
+    public String vcodeOvertime(@RequestParam("jsEmailIpt") String jsEmailIpt) {
+        try {
+            return userService.vcodeOvertime(jsEmailIpt);
+        } catch (Exception e) {
+            logger.error("邮箱验证异常" + e.getMessage());
+            ExceptionEnum serverError = ExceptionEnum.SERVER_ERROR;
+            return ResponseUtil.getJSONString(serverError.getCode(), serverError.getMessage());
+        }
     }
 }

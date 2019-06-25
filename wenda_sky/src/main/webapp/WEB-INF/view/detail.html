@@ -1,4 +1,4 @@
-^include("/header.html"){}
+~include("/header.html"){}
 <link rel="stylesheet" href="../static/styles/detail.css">
 <div class="zg-wrap zu-main clearfix with-indention-votebar" itemscope="" itemtype="http://schema.org/Question"
      id="zh-single-question-page" data-urltoken="36301524" role="main">
@@ -77,7 +77,7 @@
                  data-widget="navigable" data-navigable-options="{&quot;items&quot;: &quot;&gt;.zm-item-answer&quot;}"
                  data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}">
 
-                ^for(comment in comments){
+                ~for(comment in comments){
                 <div class="zm-item-answer  zm-item-expanded js-comment">
                     <link itemprop="url" href="">
                     <meta itemprop="answer-id" content="22162611">
@@ -85,21 +85,21 @@
                     <a class="zg-anchor-hidden" name="answer-22162611"></a>
 
                     <div class="zm-votebar goog-scrollfloater js-vote" data-id="${comment.comment.id!}">
-                        ^if(comment.liked > 0){
+                        ~if(comment.liked > 0){
                         <button class="up js-like pressed" title="赞同">
-                            ^}else{
+                            ~}else{
                             <button class="up js-like" title="赞同">
-                                ^}
+                                ~}
                                 <i class="icon vote-arrow"></i>
                                 <span class="count js-voteCount">${comment.likeCount!}</span>
                                 <span class="label sr-only">赞同</span>
                             </button>
 
-                            ^if(comment.liked < 0){
+                            ~if(comment.liked < 0){
                             <button class="down js-dislike pressed" title="反对，不会显示你的姓名">
-                                ^}else{
+                                ~}else{
                                 <button class="down js-dislike" title="反对，不会显示你的姓名">
-                                    ^}
+                                    ~}
                                     <i class="icon vote-arrow"></i>
                                     <span class="label sr-only">反对，不会显示你的姓名</span>
                                 </button>
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-                ^}
+                ~}
             </div>
             <a name="draft"></a>
 
@@ -166,4 +166,4 @@
         </div>
     </div>
 </div>
-^include("/footer.html"){}
+~include("/footer.html"){}

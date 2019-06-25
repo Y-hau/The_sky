@@ -24,6 +24,48 @@ public class RedisClient {
         return jedisPool.getResource();
     }
 
+    public String set(String key, String value) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.set(key, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return null;
+    }
+
+    public String get(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.get(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return null;
+    }
+
+    public long del(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.del(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return 0;
+    }
+
     /**
      * Set集合 添加
      *

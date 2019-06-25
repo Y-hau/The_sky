@@ -1,9 +1,9 @@
-^include("/header.html"){}
+~include("/header.html"){}
 <link rel="stylesheet" href="../static/styles/letter.css">
 <div id="main">
     <div class="zg-wrap zu-main clearfix ">
         <ul class="letter-list">
-            ^for (conversation in conversations!){
+            ~for (conversation in conversations!){
             <li id="conversation-item-10001_622873">
                 <a class="letter-link" href="/msg/detail?conversationId=${conversation.message.conversationId}">
                 </a>
@@ -21,11 +21,11 @@
                     </div>
                 </div>
                 <div class="chat-headbox">
-                    ^if(conversation.unread > 0){
+                    ~if(conversation.unread > 0){
                     <span class="msg-num">
                     ${conversation.unread}
                 </span>
-                    ^}
+                    ~}
                     <a class="list-head">
                         <img alt="头像" src="${conversation.user.headUrl}">
                     </a>
@@ -39,9 +39,9 @@
                     </p>
                 </div>
             </li>
-            ^}
+            ~}
         </ul>
 
     </div>
 </div>
-^include("/footer.html"){}
+~include("/footer.html"){}

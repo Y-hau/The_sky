@@ -6,7 +6,7 @@ jasypt:
 ###################  beetl配置  ###################
 beetl:
   templatesPath: templates
-  delimiter-statement-start: \^   #开始结束标签(yaml不允许@开头)
+  delimiter-statement-start: \~   #开始结束标签(yaml不允许@开头)
   delimiter-statement-end: null
   resource-tagroot: common/tags   #自定义标签文件Root目录和后缀
   resource-tagsuffix: tag

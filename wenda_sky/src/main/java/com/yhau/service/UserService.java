@@ -1,6 +1,6 @@
 package com.yhau.service;
 
-import com.yhau.core.util.Md5Util;
+import com.yhau.core.util.*;
 import com.yhau.dao.LoginTicketDao;
 import com.yhau.dao.UserDao;
 import com.yhau.model.LoginTicket;
@@ -23,6 +23,12 @@ public class UserService {
     private UserDao userDao;
     @Resource
     private LoginTicketDao loginTicketDao;
+
+    @Resource
+    private RedisClient redisClient;
+
+    @Resource
+    private MailUtil mailUtil;
 
     public Map<String, String> register(String username, String password) {
         Map<String, String> map = new HashMap<>();
@@ -95,6 +101,50 @@ public class UserService {
 
     public List<String> getUserNameList() {
         return userDao.selectUserNameList();
+    }
+
+    public String sendCaptcha(String mail) {
+        String ramCode = verifyCode();
+        redisClient.set(RedisKeyUtil.getVCode(mail), ramCode);
+        mailUtil.sendMail(mail, "注册验证码", ramCode);
+        return ResponseUtil.getJSONString(0);
+    }
+
+    public String vcodeOvertime(String mail) {
+        String vcode = redisClient.get(RedisKeyUtil.getVCode(mail));
+        if (vcode != null && vcode.equals("")) {
+            redisClient.del(RedisKeyUtil.getVCode(mail));
+        }
+        return ResponseUtil.getJSONString(0);
+    }
+
+
+    /**
+     * 生成随机验证码
+     *
+     * @return
+     */
+    public static String verifyCode() {
+        Random random = new Random();
+        String str = "";
+        for (int i = 0; i < 6; i++) {
+            int key = random.nextInt(3);
+            switch (key) {
+                case 0:
+                    int code1 = random.nextInt(10);
+                    str += code1;
+                    break;
+                case 1:
+                    char code2 = (char) (random.nextInt(26) + 65);
+                    str += code2;
+                    break;
+                case 2:
+                    char code3 = (char) (random.nextInt(26) + 97);
+                    str += code3;
+                    break;
+            }
+        }
+        return str;
     }
 
 }
