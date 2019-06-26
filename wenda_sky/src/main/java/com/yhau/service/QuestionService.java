@@ -33,17 +33,14 @@ public class QuestionService {
 
     public String addQuestion(String title, String content) {
 
-        if (hostHandler.getUser() != null) {
-            Question question = new Question();
-            question.setTitle(sensitiveService.filter(HtmlUtils.htmlEscape(title)));
-            question.setCommentCount(0);
-            question.setContent(sensitiveService.filter(HtmlUtils.htmlEscape(content)));
-            question.setCreatedDate(new Date());
-            question.setUserId(hostHandler.getUser().getId());
-            questionDao.addQuestion(question);
-            return ResponseUtil.getJSONString(0);
-        } else {
-            return ResponseUtil.getJSONString(999);
-        }
+        Question question = new Question();
+        question.setTitle(sensitiveService.filter(HtmlUtils.htmlEscape(title)));
+        question.setCommentCount(0);
+        question.setContent(sensitiveService.filter(HtmlUtils.htmlEscape(content)));
+        question.setCreatedDate(new Date());
+        question.setUserId(hostHandler.getUser().getId());
+        questionDao.addQuestion(question);
+        return ResponseUtil.getJSONString(0);
+
     }
 }

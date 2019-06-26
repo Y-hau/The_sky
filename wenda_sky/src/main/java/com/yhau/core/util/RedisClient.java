@@ -191,8 +191,7 @@ public class RedisClient {
      *
      * @return
      */
-    public Transaction multi() {
-        Jedis jedis = null;
+    public Transaction multi(Jedis jedis) {
         try {
             jedis = getJedis();
             return jedis.multi();
@@ -276,8 +275,8 @@ public class RedisClient {
      * @param tx
      * @return
      */
-    public List<Object> exec(Transaction tx) {
-        Jedis jedis = null;
+    public List<Object> exec(Transaction tx, Jedis jedis) {
+
         try {
             jedis = getJedis();
             return tx.exec();

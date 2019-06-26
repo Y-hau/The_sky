@@ -1,31 +1,26 @@
 ~include("/header.html"){}
-<link rel="stylesheet" href="../static/styles/letter.css">
+<link rel="stylesheet" media="all" href="../static/styles/letter.css">
 <div id="main">
     <div class="zg-wrap zu-main clearfix ">
         <ul class="letter-list">
-            ~for (conversation in conversations!){
-            <li id="conversation-item-10001_622873">
-                <a class="letter-link" href="/msg/detail?conversationId=${conversation.message.conversationId}">
-                </a>
+            ~for(conversation in conversations)
+            <li id="conversation-item-10005_622873">
+                <a class="letter-link" href="/msg/detail?conversationId=${conversation.message.conversationId}"></a>
                 <div class="letter-info">
-                    <span class="l-time">${conversation.message.createdDate,"yy-MM-dd"}</span>
+                    <span class="l-time">${conversation.message.createdDate,'yyyy-MM-dd HH:mm:ss'}</span>
                     <div class="l-operate-bar">
-                        <!--
-                    <a href="javascript:void(0);" class="sns-action-del" data-id="10001_622873">
-                    删除
-                    </a>
-                    -->
-                        <a href="/msg/detail?conversationId=${conversation.message.conversationId}">
+                        <!--<a href="javascript:void(0);" class="sns-action-del" data-id="10005_622873">
+                        删除
+                        </a>-->
+                        <a href="/msg/detail?${conversation.message.conversationId}">
                             共${conversation.message.id}条会话
                         </a>
                     </div>
                 </div>
                 <div class="chat-headbox">
-                    ~if(conversation.unread > 0){
-                    <span class="msg-num">
-                    ${conversation.unread}
-                </span>
-                    ~}
+                        <span class="msg-num">
+                            ${conversation.unread}
+                        </span>
                     <a class="list-head">
                         <img alt="头像" src="${conversation.user.headUrl}">
                     </a>
@@ -44,4 +39,6 @@
 
     </div>
 </div>
+~include("/js.html"){}
+<script type="text/javascript" src="../static/scripts/main/site/detail.js"></script>
 ~include("/footer.html"){}

@@ -3,6 +3,7 @@ package com.yhau.service;
 import com.yhau.core.util.RedisClient;
 import com.yhau.core.util.RedisKeyUtil;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
 
 import javax.annotation.Resource;
@@ -29,14 +30,14 @@ public class FollowService {
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
         Date date = new Date();
-
-        Transaction multi = redisClient.multi();
+        Jedis jedis = redisClient.getJedis();
+        Transaction multi = redisClient.multi(jedis);
         //针对于该类实体，粉丝增加（当前用户）
         redisClient.zadd(followerKey, date.getTime(), String.valueOf(userId));
         //针对于当前用户，增加对该类实体的关注
         redisClient.zadd(followeeKey, date.getTime(), String.valueOf(entityId));
 
-        List<Object> ret = redisClient.exec(multi);
+        List<Object> ret = redisClient.exec(multi, jedis);
         return (ret.size() == 2) && ((long) ret.get(0) > 0) && ((long) ret.get(1) > 0);
     }
 
@@ -52,12 +53,13 @@ public class FollowService {
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
 
-        Transaction multi = redisClient.multi();
+        Jedis jedis = redisClient.getJedis();
+        Transaction multi = redisClient.multi(jedis);
 
         redisClient.zrem(followerKey, String.valueOf(userId));
         redisClient.zrem(followeeKey, String.valueOf(entityType));
 
-        List<Object> exec = redisClient.exec(multi);
+        List<Object> exec = redisClient.exec(multi, jedis);
         return (exec.size() == 2) && ((long) exec.get(0) > 0) && ((long) exec.get(1) > 0);
     }
 

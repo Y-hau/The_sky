@@ -80,7 +80,7 @@
                 }).done(function (oResult) {
                     // 未登陆，跳转到登陆页面
                     if (oResult.code === 999) {
-                        window.location.href = '/reglogin?next=' + window.encodeURIComponent(window.document.location.pathname);
+                        window.location.href = '/login?next=' + window.encodeURIComponent(window.document.location.pathname);
                     } else {
                         oConf.ok && oConf.ok.call(that);
                         oAdd.emit('ok');
