@@ -289,6 +289,19 @@ public class RedisClient {
         return null;
     }
 
+    public List<String> lrange(String key, int start, int end) {
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            return jedis.lrange(key, start, end);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            close(jedis);
+        }
+        return null;
+    }
+
     public void close(final Jedis jedis) {
 
         this.close(jedis, null);

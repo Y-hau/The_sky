@@ -1,6 +1,9 @@
 package com.yhau.service;
 
 import com.yhau.config.web.HostHandler;
+import com.yhau.core.async.EventModel;
+import com.yhau.core.async.EventProducer;
+import com.yhau.core.async.EventType;
 import com.yhau.core.util.StaticUtil;
 import com.yhau.dao.CommentDao;
 import com.yhau.dao.QuestionDao;
@@ -23,6 +26,9 @@ public class CommentService {
     @Resource
     private QuestionDao questionDao;
 
+    @Resource
+    private EventProducer eventProducer;
+
     public void addComment(int questionId, String content) {
         if (hostHandler != null) {
             Comment comment = new Comment();
@@ -35,6 +41,9 @@ public class CommentService {
             commentDao.addComment(comment);
             int commentCount = commentDao.getCommentCount(comment.getEntityId(), comment.getEntityType());
             questionDao.updateCommentCount(comment.getEntityId(), commentCount);
+
+            eventProducer.fireEvent(new EventModel(EventType.COMMENT).setActorId(comment.getUserId())
+                    .setEntityId(questionId));
         }
     }
 
