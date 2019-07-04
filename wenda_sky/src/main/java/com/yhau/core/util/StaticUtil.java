@@ -10,4 +10,8 @@ public class StaticUtil {
 
     /*Various user ids*/
     public static int SYSTEM_USERID = 4;
+
+
+    public static final String QUESTION_TITLE_FIELD = "question_title";
+    public static final String QUESTION_CONTENT_FIELD = "question_content";
 }
