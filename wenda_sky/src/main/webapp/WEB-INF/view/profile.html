@@ -1,5 +1,4 @@
-~include("/header.html"){}
-<link rel="stylesheet" href="../static/styles/index.css">
+~layout("/tt.html"){
 <link rel="stylesheet" href="../static/styles/detail.css">
 <div class="zg-wrap zu-main clearfix " role="main">
     <div class="zm-profile-section-wrap zm-profile-followee-page">
@@ -16,11 +15,11 @@
                         <div class="zg-right">
                             ~if (profileUser.followed !=null){
                             <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0
-                                    js-follow-user" data-status="1" data-id="$profileUser.user.id">取消关注
+                                    js-follow-user" data-status="1" data-id="${profileUser.user.id}">取消关注
                             </button>
                             ~}else{
                             <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0
-                                    js-follow-user" data-id="$profileUser.user.id">关注
+                                    js-follow-user" data-id="${profileUser.user.id}">关注
                             </button>
                             ~}
                         </div>
@@ -132,6 +131,7 @@
         </div>
     </div>
 </div>
+~}
 ~include("/js.html"){}
 <script type="text/javascript" src="../static/scripts/main/site/profile.js"></script>
 ~include("/footer.html"){}

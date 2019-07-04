@@ -1,143 +1,52 @@
-<!DOCTYPE html>
-<html lang="zh-CN"
-      class="is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="description" content="一个真实的网络问答社区，帮助你寻找答案，分享知识。">
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>牛客 - 与世界分享你的知识、经验和见解</title>
-    <link rel="dns-prefetch" href="">
-    <link rel="stylesheet" href="../static/styles/common/default.css">
-    <link rel="stylesheet" href="../static/styles/common/global.css">
-    <link rel="stylesheet" href="../static/styles/common/ui.css">
-    <link rel="stylesheet" href="../static/styles/common/base.css">
-    <link rel="stylesheet" href="../static/styles/common/regLogin.css">
-
-</head>
-<body class="zhi  no-auth">
-<div class="nk-container">
-    <div class="nowcoder-header js-nowcoder-header">
-        <div class="header-main clearfix">
-            <a class="nowcoder-logo" href="/" title="牛客网"></a>
-            <ul class="nowcoder-navbar">
-                <li data-type="home"><a href="/">首页</a></li>
-                <li data-type="tiku">
-                    <a href="https://www.nowcoder.com/contestRoom">题库</a>
-                    <ul class="sub-nav" data-type="tiku">
-                        <li><a href="https://www.nowcoder.com/contestRoom">公司真题</a></li>
-                        <li><a href="https://www.nowcoder.com/intelligentTest">专项练习</a></li>
-                        <li><a href="https://www.nowcoder.com/activity/oj">在线编程</a></li>
-                        <li><a href="https://www.nowcoder.com/mockexam/MockExam">模拟笔试</a></li>
-                        <li><a href="https://www.nowcoder.com/schoolbooks">教材全解</a></li>
-                        <li><a href="https://www.nowcoder.com/kaoyan">考研真题</a></li>
-                        <li><a href="https://www.nowcoder.com/finalexam">期末考题</a></li>
-                        <li><a href="https://www.nowcoder.com/activity/topics">精华专题</a></li>
-                        <li><a href="https://www.nowcoder.com/questionCenter">试题广场</a></li>
-                    </ul>
+~layout("/tt.html"){
+<div class="nk-main clearfix">
+    <div class="wrapper">
+        <div class="tabbed">
+            <ul class="clearfix">
+                <li class="${tabLogin!}"><a href="/${login!}"><span class="tab-login"></span>登录</a>
                 </li>
-                <li data-type="ai-interview">
-                    <span class="ico-nav-new"></span>
-                    <a href="https://www.nowcoder.com/interview/ai/index">面试</a>
-                    <ul class="sub-nav" data-type="courses">
-                        <li><a href="https://www.nowcoder.com/interview/ai/index">AI模拟面试</a></li>
-                        <li><a href="https://www.nowcoder.com/interview/center">面经汇总</a></li>
-                    </ul>
-                </li>
-                <li data-type="courses">
-                    <a href="https://www.nowcoder.com/courses">学习</a>
-                    <ul class="sub-nav" data-type="courses">
-                        <li><a href="https://www.nowcoder.com/courses">课程</a></li>
-                        <li><a href="https://www.nowcoder.com/project/recommend">项目实战</a></li>
-                        <li><a href="https://www.nowcoder.com/library">图书馆</a></li>
-                        <li><a href="https://www.nowcoder.com/stacks">技术栈</a></li>
-                    </ul>
-                </li>
-                <li data-type="recommand"><a href="https://www.nowcoder.com/recommend">求职</a></li>
-                <li data-type="discuss"><a href="https://www.nowcoder.com/discuss">讨论区</a></li>
-                <li data-type="more">
-                    <a href="https://ac.nowcoder.com/acm/home">发现</a>
-                    <ul class="sub-nav" data-type="more">
-                        <li><a href="https://ac.nowcoder.com/acm/home">竞赛</a></li>
-                        <li><a href="https://www.nowcoder.com/show-offer/index">Offer神器</a></li>
-                        <li><a href="/user/authentication">职业身份认证</a></li>
-                        <li><a href="https://www.nowcoder.com/ranking">排行榜</a></li>
-                        <li><a href="https://www.nowcoder.com/coin/index">牛币兑换中心</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="nav-account">
-                <a href="/login" class="nav-account-login" id="nav-login">登录</a>/
-                <a href="/register" class="nav-account-reg" id="jsNavRegister">注册</a>
-            </div>
-            <ul class="nowcoder-navbar nowcoder-other-nav">
-                <li class="nav-search">
-                    <a href="javascript:void(0);" class="icon-search js-search-btn">搜索</a>
-                    <div class="newnav-search-wrap">
-                        <div class="newnav-search-cont">
-                            <form method="get" action="/search">
-                                <input class="nav-search-txt" name="query" type="text" autocomplete="off">
-                                <input type="hidden" name="type" value="all">
-                                <input type="submit" class="nk-invisible">
-                                <a href="javascript:void(0);" class="icon-search-colse  js-close-search-btn"></a>
-                            </form>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="/app" class="icon-mobile-phone">APP</a></li>
-                <li><a href="http://hr.nowcoder.com" class="icon-briefcase" target="_blank">企业版</a></li>
+                <li class="${tabReg!}"><a href="/${register!}"><span class="tab-reg"></span>注册</a></li>
             </ul>
         </div>
-    </div>
-    <div class="nk-main clearfix">
-        <div class="wrapper">
-            <div class="tabbed">
-                <ul class="clearfix">
-                    <li class="${tabLogin!}"><a href="/${login!}"><span class="tab-login"></span>登录</a>
-                    </li>
-                    <li class="${tabReg!}"><a href="/${register!}"><span class="tab-reg"></span>注册</a></li>
-                </ul>
-            </div>
-            <div class="wrapper-content clearfix">
-                ~if(isLoginOrRegister){
-                ~include("/beetl/login.html"){}
-                ~}else{
-                ~include("/beetl/register.html"){}
-                ~}
+        <div class="wrapper-content clearfix">
+            ~if(isLoginOrRegister){
+            ~include("/beetl/login.html"){}
+            ~}else{
+            ~include("/beetl/register.html"){}
+            ~}
 
-                <div class="other-login-way">
-                    <span class="separate-line">或</span>
-                    <div class="login-way">
-                        <a href="javascript:void(0);"
-                           data-href="https://graph.qq.com/oauth2.0/authorize?client_id=101003590&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/qqconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=web&amp;scope=get_user_info"
-                           class="nc-js-action-oauth login-qq">QQ账号登录</a>
-                        <a href="javascript:void(0);"
-                           data-href="https://api.weibo.com/oauth2/authorize?client_id=3023520088&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/sinaconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=0_51f737e3fd5243e29a9d96192a0b43d8&amp;scope=follow_app_official_microblog"
-                           class="nc-js-action-oauth login-wb">微博账号登录</a>
-                        <a href="javascript:void(0);"
-                           data-href="https://open.weixin.qq.com/connect/qrconnect?appid=wxfee0340998de6ab1&amp;redirect_uri=https%3A%2F%2Fwww.nowcoder.com%2Foauth2%2Flogin%2Fweixin?&amp;response_type=code&amp;scope=snsapi_login&amp;state=11"
-                           class="nc-js-action-oauth login-wx">微信账号登录</a>
-                        <div class="login-fold" id="jsLoginFold">
-                            <a href="javascript:void(0);" class="login-more">更多三方账号</a>
-                            <div class="login-unfold-icons">
-                                <!-- <a href="javascript:void(0);" data-href="https://github.com/login/oauth/authorize?client_id=1c539827b9400016d0c9&response_type=code&redirect_uri=http://www.nowcoder.com/oauth2/gitconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&state=web&scope=user:email" class="nc-js-action-oauth login-git"></a>
-                                 -->
-                                <a href="javascript:void(0);"
-                                   data-href="https://www.douban.com/service/auth2/auth?client_id=075c6b46242f18c8161541d26c8d4a58&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/dbconfig&amp;state=web"
-                                   class="nc-js-action-oauth login-db"></a>
-                                <a href="javascript:void(0);"
-                                   data-href="https://graph.renren.com/oauth/authorize?client_id=33356a41ddac4028a9ad64925e68c0e0&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/rrconfig&amp;state=web"
-                                   class="nc-js-action-oauth login-rr"></a>
-                            </div>
+            <div class="other-login-way">
+                <span class="separate-line">或</span>
+                <div class="login-way">
+                    <a href="javascript:void(0);"
+                       data-href="https://graph.qq.com/oauth2.0/authorize?client_id=101003590&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/qqconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=web&amp;scope=get_user_info"
+                       class="nc-js-action-oauth login-qq">QQ账号登录</a>
+                    <a href="javascript:void(0);"
+                       data-href="https://api.weibo.com/oauth2/authorize?client_id=3023520088&amp;response_type=code&amp;redirect_uri=https://www.nowcoder.com/oauth2/sinaconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&amp;state=0_51f737e3fd5243e29a9d96192a0b43d8&amp;scope=follow_app_official_microblog"
+                       class="nc-js-action-oauth login-wb">微博账号登录</a>
+                    <a href="javascript:void(0);"
+                       data-href="https://open.weixin.qq.com/connect/qrconnect?appid=wxfee0340998de6ab1&amp;redirect_uri=https%3A%2F%2Fwww.nowcoder.com%2Foauth2%2Flogin%2Fweixin?&amp;response_type=code&amp;scope=snsapi_login&amp;state=11"
+                       class="nc-js-action-oauth login-wx">微信账号登录</a>
+                    <div class="login-fold" id="jsLoginFold">
+                        <a href="javascript:void(0);" class="login-more">更多三方账号</a>
+                        <div class="login-unfold-icons">
+                            <!-- <a href="javascript:void(0);" data-href="https://github.com/login/oauth/authorize?client_id=1c539827b9400016d0c9&response_type=code&redirect_uri=http://www.nowcoder.com/oauth2/gitconfig?callBack=https%3A%2F%2Fwww.nowcoder.com%2Fprofile%2F152887960&state=web&scope=user:email" class="nc-js-action-oauth login-git"></a>
+                            -->
+                            <a href="javascript:void(0);"
+                               data-href="https://www.douban.com/service/auth2/auth?client_id=075c6b46242f18c8161541d26c8d4a58&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/dbconfig&amp;state=web"
+                               class="nc-js-action-oauth login-db"></a>
+                            <a href="javascript:void(0);"
+                               data-href="https://graph.renren.com/oauth/authorize?client_id=33356a41ddac4028a9ad64925e68c0e0&amp;response_type=code&amp;redirect_uri=http://www.nowcoder.com/oauth2/rrconfig&amp;state=web"
+                               class="nc-js-action-oauth login-rr"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+~}
 <script type="text/javascript" src="../static/scripts/main/jquery.min.js"></script>
 <script type="text/javascript" src="../static/scripts/main/ajax-object.js"></script>
 <script type="text/javascript" src="../static/scripts/main/jquery.cookie.js"></script>
@@ -284,5 +193,4 @@
         }
     }
 </script>
-</body>
-</html>
+~include("/footer.html"){}

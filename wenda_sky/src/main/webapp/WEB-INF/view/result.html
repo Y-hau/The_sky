@@ -1,5 +1,5 @@
 ~var bodyclass = "page-search";
-~include("/header.html"){}
+~layout("/tt.html"){
 <link rel="stylesheet" href="../static/styles/result.css">
 <link rel="stylesheet" href="../static/styles/detail.css">
 <div class="zg-wrap zu-main clearfix" role="main">
@@ -22,8 +22,10 @@
                                     </div>
                                     <div class="entry-body">
                                         <div class="entry-meta">
-                                            <strong class="author-line"><a class="author" href="/user/${vo.user.id!}">${vo.user.name!}</a>，${vo.question.createdDate!,'yyyy-MM-dd
-                                                HH:mm:ss'})</strong>
+                                            <strong class="author-line">
+                                                <a class="author" href="/user/${vo.user.id!}">${vo.user.name!}</a>
+                                                ，${vo.question.createdDate,'yyyy-MM-dd HH:mm:ss'}
+                                            </strong>
                                         </div>
                                         <div class="entry-content js-collapse-body">
                                             <div class="summary hidden-expanded" style="">
@@ -41,5 +43,6 @@
         </div>
     </div>
 </div>
+~}
 ~include("/js.html"){}
 ~include("/footer.html"){}

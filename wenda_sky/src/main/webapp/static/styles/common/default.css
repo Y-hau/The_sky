@@ -314,7 +314,7 @@
 .newnav-search-wrap {
     position: absolute;
     z-index: 1000;
-    left: 25px;
+    right: 0px;
     top: 0;
     background: #31363d;
     height: 34px;
@@ -345,8 +345,8 @@
 }
 
 .newnav-search-cont {
-    margin-left: -22px;
-    padding-left: 18px;
+    margin-left: 0px;
+    padding-left: 0px;
     padding-right: 15px;
     border-bottom: 1px solid #00bc9b
 }
