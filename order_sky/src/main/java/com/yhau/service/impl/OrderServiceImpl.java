@@ -60,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
                 e -> new DecreaseStockInput(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productClient.decreaseStock(decreaseStockInputs);
 
+        //订单入库
         OrderMaster orderMaster = new OrderMaster();
         orderDTO.setOrderId(orderId);
         BeanUtils.copyProperties(orderDTO, orderMaster);

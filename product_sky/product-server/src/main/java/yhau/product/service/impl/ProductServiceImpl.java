@@ -14,6 +14,7 @@ import yhau.product.service.ProductService;
 import yhau.product.utils.JsonUtil;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,9 +51,11 @@ public class ProductServiceImpl implements ProductService {
             BeanUtils.copyProperties(e, output);
             return output;
         }).collect(Collectors.toList());
+        //发送mq消息
         amqpTemplate.convertAndSend("productInfo", JsonUtil.toJson(productInfoOutputs));
     }
 
+    @Transactional
     public List<ProductInfo> decreaseStockProcess(List<DecreaseStockInput> decreaseStockInputs) {
         List<ProductInfo> productInfos = new ArrayList<>();
         for (DecreaseStockInput decreaseStockInput : decreaseStockInputs) {
@@ -65,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
             ProductInfo productInfo = productInfoOptional.get();
             //库存是否足够
             Integer result = productInfo.getProductStock() - decreaseStockInput.getProductQuantity();
-            if (result < 1) {
+            if (result < 0) {
                 throw new ProductException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
             productInfo.setProductStock(result);

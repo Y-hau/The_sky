@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: config_sky
+  cloud:
+    config:
+      server:
+        git:
+          username: onetoyin@163.com
+          password: Yh0815..
+          uri: https://github.com/Y-hau/the_sky_config.git
+          basedir: D:/basedir
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka/
+management:
+  endpoints:
+    web:
+      expose: "*"
+logging:
+  level:
+    org.springframework.web: TRACE

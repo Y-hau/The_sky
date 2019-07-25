@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: product
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config_sky
+      profile: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/the_sky?serverTimezone=GMT%2B8
+    username: root
+    password: root
+    jpa:
+      show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka/
